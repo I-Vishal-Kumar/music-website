@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>muziek</title>
+    <link rel="stylesheet" href="music.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+      <div class="main">
+        <div class="box">
+
+          <div class="titleS">
+               <p class="song"></p>
+               <p class="singer"></p>
+            </div>
+
+
+            <div class="circle">
+              <div class="test">
+                <img src="pics/first.jpg" style="width:200px;height:250px">
+              </div>
+            </div>
+
+                   <div class="barBox">
+
+                      <div class="Duration">
+                       <div class="start"></div>
+                       <div class="end"></div>
+
+                      </div>
+
+                      <div class="progressBar">
+                         <div class="status"></div>
+                      </div>
+
+                   </div>
+               <!-- progress bar end -->
+            <div class="nav">
+
+             <div class="prev"><ion-icon name="play-back-outline"></ion-icon></div>
+             <div class="play"><ion-icon name="play-outline"></ion-icon></div>
+             <div class="next"><ion-icon name="play-forward-outline"></ion-icon></div>
+
+           <audio src="music/he-Ram-He-Ram-jagjit-Singh.mp3"></audio>
+           <!-- <audio src=""></audio> -->
+
+            </div>
+
+        </div>
+      </div>
+
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+   <script>
+
+       const next = document.querySelector('.next');
+       const prev = document.querySelector('.prev');
+       const play = document.querySelector('.play');
+       const music = document.querySelector('audio');
+       const singer = document.querySelector('.singer');
+       const song = document.querySelector('.song');
+       const image = document.querySelector('img');
+       const status = document.querySelector('.status');
+       let start   = document.querySelector(".start");
+       let end   = document.querySelector(".end");
+       let yes = true;
+
+       let data = [
+         {
+         name : "He-Ram-He-Ram-jagjit-Singh",
+         title : "He ram",
+         singer : "jagjit Singh",
+         imag : "first",
+       },
+       {
+         name : "2",
+         title : "Aila Re",
+         singer : "suraj",
+         imag : "vikash",
+       },
+       {
+         name : "Aise Na Chhoro Guru Randhawa 128 kbps",
+         title : "Aise Na Choro",
+         singer : "Guru Randhawa",
+         imag : "photo2",
+       },
+       {
+         name : "Bansuri Hum Do Humare Do 128 Kbps",
+         title : "Hum Do Humare",
+         singer : "Bansuri",
+         imag : "photo3",
+       },{
+         name : "Duniya Chhor Doon Darshan Raval 128 Kbps",
+         title : "Duniya Chhor Doo",
+         singer : "Darshan Raval",
+         imag : "photo4",
+       },{
+         name : "Jabb Se Tumko Dekhaa Stebin Ben 128 Kbps",
+         title : "Jaab Se Tumko",
+         singer : "Stebin Ben",
+         imag : "photo5",
+       },{
+         name : "Jodaa Afsana Khan 128 Kbps",
+         title : "Jodaa Afsana",
+         singer : "Jodha",
+         imag : "photo6",
+       },{
+         name : "O Yaara Dil Lagana Sanak 128 Kbps",
+         title : "O Yaara Dil La",
+         singer : "Sanak",
+         imag : "photo7",
+       },
+       {
+         name : "Pardesi Arko 128 Kbps",
+         title : "pardesi",
+         singer : "Arko",
+         imag : "photo8",
+       },{
+         name : "Pyaar...ek Tarfaa Amaal Mallik 128 Kbps",
+         title : "Ek tarfaa",
+         singer : "Amaal Mallik",
+         imag : "photo9",
+       },{
+         name : "Saawariya Aastha Gill 128 Kbps",
+         title : "Sawariya",
+         singer : "Aastha Gill",
+         imag : "photo10",
+       },{
+         name : "Tera Naam Tulsi Kumar 128 Kbps",
+         title : "Tera Naam",
+         singer : "Tulsi Kumar",
+         imag : "photo11",
+       },
+  ];
+
+         const newSong = (songs)=>{
+                song.innerHTML = songs.title;
+                music.src = "music/" + songs.name + ".mp3";
+                singer.innerHTML = songs.singer;
+                image.src = "pics/"+songs.imag + ".jpg";
+                play.innerHTML = '<ion-icon name="play-outline"></ion-icon>';
+                 status.style.width ="0%";
+         }
+         const prevSong = (songs)=>{
+              song.innerHTML = songs.title;
+              music.src = "music/" + songs.name + ".mp3";
+              singer.innerHTML = songs.singer;
+              image.src = "pics/"+songs.imag + ".jpg";
+              play.innerHTML = '<ion-icon name="play-outline"></ion-icon>';
+              status.style.width = "0%";
+         }
+
+
+       function pla(){
+           music.play();
+           yes = false;
+          play.innerHTML = '<ion-icon name="pause-outline"></ion-icon>';
+       }
+
+       function paus(){
+
+          music.pause();
+          yes = true;
+          play.innerHTML = '<ion-icon name="play-outline"></ion-icon>';
+
+       }
+
+       let i = 0;
+       newSong(data[i]);
+       next.addEventListener('click', ()=>{
+          if(i > 10){
+            song.innerHTML = "end of songs";
+            singer.innerHTML = "";
+          }else{
+            i++;
+            newSong(data[i]);
+          }
+    });
+
+    prev.addEventListener('click',()=>{
+      if(i <= 0){
+        song.innerHTML = "Starting point";
+        singer.innerHTML = "";
+      }else{
+        i--;
+        prevSong(data[i]);
+        // console.log(i)
+      }
+    })
+       play.addEventListener('click', ()=>{
+           yes ? pla() : paus();
+       });
+
+       start.innerHTML = "0:0";
+       // end.innerText = "0:0";
+
+     music.addEventListener('timeupdate',(eve)=>{
+
+      const {currentTime , duration} = eve.srcElement;
+
+      let time =(currentTime/duration)*100;
+
+      if(currentTime === duration){
+        i++;
+        newSong(data[i]);
+      }
+
+      let s = Math.floor(currentTime/60);
+      let sec = Math.floor(currentTime%60);
+      let e = Math.floor(duration/60);
+      let esec = Math.floor(duration%60);
+
+      let check = isNaN(e / esec);
+
+      if(check){
+         e = 0;
+         esec = 0;
+      }
+
+      // console.log(e);
+      start.innerHTML = `${s}:${sec}`;
+      end.innerHTML = `${e}:${esec}`;
+      status.style.width = `${time}%`;
+
+   });
+
+   </script>
+
+  </body>
+
+</html>
